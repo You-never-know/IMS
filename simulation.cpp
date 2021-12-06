@@ -3,6 +3,8 @@
 //
 
 #include "simlib.h"
+#include "covidProgress.h"
+#include "demand.h"
 
 int main(int argc, char** argv) {
 
@@ -10,6 +12,9 @@ int main(int argc, char** argv) {
     double endTime = 2000;
     // Init the simulation with start and end time
     Init(startTime, endTime);
+    CovidProgress *simulation = new CovidProgress();
+    simulation->Activate();
+    (new Demand(simulation))->Activate();
     // Run the simulation
     Run();
     return 0;
