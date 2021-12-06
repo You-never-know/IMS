@@ -3,18 +3,22 @@
 //
 
 #include "simlib.h"
-#include "covidProgress.h"
-#include "demand.h"
+#include "covidProgress.hpp"
+#include "demand.hpp"
+#include "data.hpp"
 
 int main(int argc, char** argv) {
 
+    int startSupply = 800;
+    int startDemand = 2000;
     double startTime = 0;
     double endTime = 2000;
     // Init the simulation with start and end time
     Init(startTime, endTime);
     CovidProgress *simulation = new CovidProgress();
     simulation->Activate();
-    (new Demand(simulation))->Activate();
+    Data * globalData = new Data(startSupply, startDemand);
+    (new Demand(simulation, globalData))->Activate();
     // Run the simulation
     Run();
     return 0;

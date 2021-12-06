@@ -8,6 +8,10 @@ OBJS = \
 	simulation.o
 
 BUILD = $(OBJS) $(APP)
+HEADERS = \
+	demand.hpp \
+	supply.hpp \
+	covidProgress.hpp
 
 .PHONY: all clean
 all: $(APP)
@@ -15,7 +19,7 @@ all: $(APP)
 $(APP) : $(OBJS)
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
-simulation.o: simulation.cpp
+simulation.o: simulation.cpp $(HEADERS)
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 
