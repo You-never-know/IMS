@@ -1,7 +1,9 @@
 #pragma once
 #ifndef ARGS_PARSER_HPP
 #define ARGS_PARSER_HPP
+
 #include <iostream>
+#include "covidPhase.hpp"
 
 /**
  * @brief  Class for parsing program arguments
@@ -9,27 +11,45 @@
  */
 class ArgsParser {
 public:
-  ArgsParser(int argc, char **argv);
-  ~ArgsParser() = default;
+    ArgsParser(int argc, char **argv);
 
-  int getDaysCount() { return _daysCount; }
-  int getCovidWave() { return _covidWave; }
-  int getCovidPhase() { return _covidPhase; }
-  int getBaseDemand() { return _baseDemand; }
-  int getProductionCapacity() { return _productionCapacity; }
+    ~ArgsParser() = default;
 
-  void setDaysCount(int daysCount);
-  void setCovidWave(int covidWave);
-  void setCovidPhase(int covidPhase);
-  void setBaseDemand(int baseDemand);
-  void setProductionCapacity(int productionCapacity);
+    int getDaysCount() const { return _daysCount; }
+
+    int getCovidWave() const { return _covidWave; }
+
+    covidPhase getCovidPhase() const { return _covidPhase; }
+
+    int getBaseDemand() const { return _baseDemand; }
+
+    int getDemandIncrease() const { return _demandIncrease; }
+
+    int getProductionCapacity() const { return _productionCapacity; }
+
+    void setDaysCount(int daysCount);
+
+    void setCovidWave(int covidWave);
+
+    void setCovidPhase(covidPhase covidPhase);
+
+    void setBaseDemand(int baseDemand);
+
+    void setDemandIncrease(int demandIncrease);
+
+    void setProductionCapacity(int productionCapacity);
+
+    void printHelp();
+
+    bool isNumber(std::string str);
 
 private:
-  int _daysCount{};
-  int _covidWave{};  /* TODO is int? enum? */
-  int _covidPhase{}; /* TODO is int? enum? */
-  int _baseDemand{};
-  int _productionCapacity{};
+    int _daysCount{};
+    int _covidWave{};
+    covidPhase _covidPhase{};
+    int _baseDemand{};
+    int _demandIncrease{};
+    int _productionCapacity{};
 };
 
 std::ostream &operator<<(std::ostream &os, const ArgsParser &ap);

@@ -6,8 +6,12 @@
 #include "covidProgress.hpp"
 #include "demand.hpp"
 #include "data.hpp"
+#include "argsParser.hpp"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
+
+    ArgsParser args = ArgsParser(argc, argv);
+    std::cout << args << std::endl;
 
     int startSupply = 800;
     int startDemand = 2000;
@@ -17,7 +21,7 @@ int main(int argc, char** argv) {
     Init(startTime, endTime);
     CovidProgress *simulation = new CovidProgress();
     simulation->Activate();
-    Data * globalData = new Data(startSupply, startDemand);
+    Data *globalData = new Data(startSupply, startDemand);
     (new Demand(simulation, globalData))->Activate();
     // Run the simulation
     Run();

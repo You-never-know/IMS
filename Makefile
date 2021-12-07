@@ -5,12 +5,14 @@ LDFLAGS := -lsimlib
 APP := simulation
 
 OBJS = \
-	simulation.o
+	simulation.o \
+	argsParser.o
 
 BUILD = $(OBJS) $(APP)
 HEADERS = \
 	demand.hpp \
 	supply.hpp \
+	argsParser.hpp \
 	covidProgress.hpp
 
 .PHONY: all clean
@@ -22,6 +24,8 @@ $(APP) : $(OBJS)
 simulation.o: simulation.cpp $(HEADERS)
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
+argsParser.o: argsParser.cpp argsParser.hpp
+	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(BUILD)
