@@ -12,12 +12,12 @@ public:
     Supply() {
 
     };
+
     void Behavior() {
-        std::cout << stateSource->getCovidState() << " , ";
+        std::cout << stateSource->getCovidPhase() << " , ";
         (new Demand(stateSource))->Activate(Time + Exponential(10));
     };
 };
-
 
 
 #endif //IMS_SUPPLY_H

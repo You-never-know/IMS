@@ -4,32 +4,33 @@
 
 #ifndef IMS_COVID_H
 #define IMS_COVID_H
-#include "simlib.h"
 
-enum covidState {CovidFree, CovidStart, CovidPeak, CovidEnd};
+#include "simlib.h"
+#include "covidPhase.hpp"
 
 class CovidProgress : public Event {
 private:
-    covidState state = CovidFree;
+    covidPhase state = covidPhase::CovidFree;
     int wave = 0;
 
 public:
-    covidState  getCovidState () { return state; }
-    int         getCovidWave () { return wave; }
+    covidPhase getCovidPhase() { return state; }
+
+    int getCovidWave() const { return wave; }
 
     void Behavior() {
-        if (state == CovidFree) {
-            state = CovidStart;
+        if (state == covidPhase::CovidFree) {
+            state = covidPhase::CovidStart;
             wave++;
             Activate(Time + Exponential(30));
-        } else if (state == CovidStart) {
-            state = CovidPeak;
+        } else if (state == covidPhase::CovidStart) {
+            state = covidPhase::CovidPeak;
             Activate(Time + Exponential(40));
-        } else if (state == CovidPeak) {
-            state = CovidEnd;
+        } else if (state == covidPhase::CovidPeak) {
+            state = covidPhase::CovidEnd;
             Activate(Time + Exponential(15));
         } else {
-            state = CovidFree;
+            state = covidPhase::CovidFree;
             Activate(Time + Exponential(60));
         }
     }

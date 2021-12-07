@@ -4,21 +4,23 @@
 
 #ifndef IMS_INQUIRY_H
 #define IMS_INQUIRY_H
+
 #include "covidProgress.hpp"
 #include "data.hpp"
 #include <iostream>
 
 class Demand : public Process {
 private:
-    CovidProgress * stateSource;
-    Data * data;
+    CovidProgress *stateSource;
+    Data *data;
 public:
-    Demand(CovidProgress * simulation, Data * data) {
+    Demand(CovidProgress *simulation, Data *data) {
         stateSource = simulation;
         this->data = data;
     };
+
     void Behavior() {
-        std::cout << stateSource->getCovidState() << " , ";
+        std::cout << getValueKey(stateSource->getCovidPhase()) << " , ";
         (new Demand(stateSource, data))->Activate(Time + Exponential(10));
     };
 };
