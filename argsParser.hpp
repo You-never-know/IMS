@@ -27,18 +27,6 @@ public:
 
     int getProductionCapacity() const { return _productionCapacity; }
 
-    void setDaysCount(int daysCount);
-
-    void setCovidWave(int covidWave);
-
-    void setCovidPhase(covidPhase covidPhase);
-
-    void setBaseDemand(int baseDemand);
-
-    void setDemandIncrease(int demandIncrease);
-
-    void setProductionCapacity(int productionCapacity);
-
     void printHelp();
 
     bool isNumber(std::string str);

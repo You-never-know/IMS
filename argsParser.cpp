@@ -154,27 +154,3 @@ ArgsParser::ArgsParser(int argc, char **argv) {
         exit(1);
     }
 }
-
-void ArgsParser::setDaysCount(int daysCount) {
-    _daysCount = daysCount;
-}
-
-void ArgsParser::setCovidWave(int covidWave) {
-    _covidWave = covidWave;
-}
-
-void ArgsParser::setCovidPhase(covidPhase covidPhase) {
-    _covidPhase = covidPhase;
-}
-
-void ArgsParser::setBaseDemand(int baseDemand) {
-    _baseDemand = baseDemand;
-}
-
-void ArgsParser::setDemandIncrease(int demandIncrease) {
-    _demandIncrease = demandIncrease;
-}
-
-void ArgsParser::setProductionCapacity(int productionCapacity) {
-    _productionCapacity = productionCapacity;
-}
