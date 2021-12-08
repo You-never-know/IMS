@@ -76,7 +76,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
             {"demand-increase",     required_argument, 0, 'i'},
             {"production-capacity", required_argument, 0, 'c'},
             {"help",                no_argument,       0, 'h'},
-            {0, 0,                                     0, 0}};
+            {0,                     0,                 0, 0}};
 
     int option_index;
     while ((c = getopt_long(argc, argv, "t:w:f:d:i:c:h", _long_options, &option_index)) !=
@@ -92,7 +92,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                     std::cerr << "Invalid days-count argument - must be a number!" << std::endl;
                     exit(1);
                 }
-                _daysCount = std::stoi(std::string(optarg));
+                _daysCount = std::stod(std::string(optarg));
                 break;
             }
             case 'w': {

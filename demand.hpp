@@ -9,19 +9,30 @@
 #include "data.hpp"
 #include <iostream>
 
-class Demand : public Process {
+class Demand : public Event {
 private:
-    CovidProgress *stateSource;
-    Data *data;
+    int currentDemand;
+    Data *globalData;
 public:
-    Demand(CovidProgress *simulation, Data *data) {
-        stateSource = simulation;
-        this->data = data;
+    Demand(Data *data, int startDemand) {
+        currentDemand = startDemand;
+        globalData = data;
     };
 
     void Behavior() {
-        std::cout << getValueKey(stateSource->getCovidPhase()) << " , ";
-        (new Demand(stateSource, data))->Activate(Time + Exponential(10));
+        // change the monthly demand according to the covid phase and covid wave
+        // maybe make even the demand Exponential ?
+        if (globalData->getCovidPhase() == covidPhase::CovidFree) {
+
+        } else if (globalData->getCovidPhase() == covidPhase::CovidStart) {
+
+        } else if (globalData->getCovidPhase() == covidPhase::CovidPeak) {
+
+        } else {
+        }
+        // add current Demand to the global Demand
+        globalData->add2chipDemandCount(currentDemand);
+        Activate(Time + Exponential(14))
     };
 };
 

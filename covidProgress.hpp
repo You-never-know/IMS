@@ -7,31 +7,43 @@
 
 #include "simlib.h"
 #include "covidPhase.hpp"
+#include "data.hpp"
 
+/**
+ * @brief  Class for simulating covid progress
+ */
 class CovidProgress : public Event {
 private:
-    covidPhase state = covidPhase::CovidFree;
-    int wave = 0;
+    Data *globalData;
 
 public:
-    covidPhase getCovidPhase() { return state; }
-
-    int getCovidWave() const { return wave; }
+    CovidProgress(Data *data) {
+        globalData = data;
+        if (globalData->getCovidPhase() == covidPhase::CovidFree) {
+            globalData->setCovidPhase(covidPhase::CovidEnd);
+        } else if (globalData->getCovidPhase() == covidPhase::CovidStart) {
+            globalData->setCovidPhase(covidPhase::CovidFree);
+        } else if (globalData->getCovidPhase() == covidPhase::CovidPeak) {
+            globalData->setCovidPhase(covidPhase::CovidStart);
+        } else {
+            globalData->setCovidPhase(covidPhase::CovidPeak);
+        }
+    }
 
     void Behavior() {
-        if (state == covidPhase::CovidFree) {
-            state = covidPhase::CovidStart;
-            wave++;
-            Activate(Time + Exponential(30));
-        } else if (state == covidPhase::CovidStart) {
-            state = covidPhase::CovidPeak;
-            Activate(Time + Exponential(40));
-        } else if (state == covidPhase::CovidPeak) {
-            state = covidPhase::CovidEnd;
-            Activate(Time + Exponential(15));
+        if (globalData->getCovidPhase() == covidPhase::CovidFree) {
+            globalData->setCovidPhase(covidPhase::CovidStart);
+            globalData->incrementCovidWave();
+            Activate(Time + Exponential(42));
+        } else if (globalData->getCovidPhase() == covidPhase::CovidStart) {
+            globalData->setCovidPhase(covidPhase::CovidPeak);
+            Activate(Time + Exponential(28));
+        } else if (globalData->getCovidPhase() == covidPhase::CovidPeak) {
+            globalData->setCovidPhase(covidPhase::CovidEnd);
+            Activate(Time + Exponential(42));
         } else {
-            state = covidPhase::CovidFree;
-            Activate(Time + Exponential(60));
+            globalData->setCovidPhase(covidPhase::CovidFree);
+            Activate(Time + Exponential(28));
         }
     }
 };

@@ -15,7 +15,7 @@ public:
 
     ~ArgsParser() = default;
 
-    int getDaysCount() const { return _daysCount; }
+    double getDaysCount() const { return _daysCount; }
 
     int getCovidWave() const { return _covidWave; }
 
@@ -44,7 +44,7 @@ public:
     bool isNumber(std::string str);
 
 private:
-    int _daysCount{};
+    double _daysCount{};
     int _covidWave{};
     covidPhase _covidPhase{};
     int _baseDemand{};

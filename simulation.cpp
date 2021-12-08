@@ -8,22 +8,23 @@
 #include "data.hpp"
 #include "argsParser.hpp"
 
+#define START_TIME 0
+
 int main(int argc, char **argv) {
 
     ArgsParser args = ArgsParser(argc, argv);
     std::cout << args << std::endl;
 
-    int startSupply = 800;
-    int startDemand = 2000;
-    double startTime = 0;
-    double endTime = 2000;
     // Init the simulation with start and end time
-    Init(startTime, endTime);
-    CovidProgress *simulation = new CovidProgress();
-    simulation->Activate();
-    Data *globalData = new Data(startSupply, startDemand);
-    (new Demand(simulation, globalData))->Activate();
+    double endTime = (args.getDaysCount() > 10) ? args.getDaysCount() : 1095;
+    Init(START_TIME, endTime);
+    // create
+    Data *globalData = new Data(args.getBaseDemand(), args.getCovidWave(), args.getCovidPhase());
+    (new CovidProgress(globalData))->Activate();
+    (new Demand(globalData, args.getDemandIncrease()))->Activate(Exponential(14));
     // Run the simulation
     Run();
+
+    delete (globalData);
     return 0;
 }

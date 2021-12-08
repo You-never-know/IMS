@@ -5,38 +5,54 @@
 #ifndef IMS_DATA_H
 #define IMS_DATA_H
 
+#include "covidPhase.hpp"
+#include "simlib.h"
+
+/**
+ * @brief  Class for storing relevant program data
+ */
 class Data {
 private:
-    int supply;
-    int demand;
-    int defaultSupply = 500;
-    int defaultDemand = 1000;
-public:
-    Data(int supply, int demand) {
-        supply = (supply > 0) ? supply : defaultSupply;
-        demand = (demand > 0) ? demand : defaultDemand;
-        this->supply = supply;
-        this->demand = demand;
-    }
-    Data() {
-        this->supply = defaultSupply;
-        this->demand = defaultDemand;
-    }
-    int getDemand () { return demand; }
-    int getSupply () { return supply; }
+    int storageChipCount;
+    int chipDemandCount;
+    int covidWave;
+    covidPhase phase;
+    int defaultStartDemand = 200;
 
-    void changeDemand (int change) {
-        this->demand += change;
-        if (this->demand < 0) {
-            this->demand = 0;
-        }
+public:
+    Data(int startDemand, int startWave, covidPhase startPhase) : storageChipCount{0} {
+        phase = startPhase;
+        covidWave = (startWave >= 0) ? startWave : 0;
+        chipDemandCount = (startDemand > 0) ? startDemand : defaultStartDemand;
     }
-    void changeSupply (int change) {
-        this->supply += change;
-        if (this->supply < 0) {
-            this->supply = 0;
-        }
+
+    Data() : storageChipCount{0} {
+        phase = covidPhase::CovidFree;
+        covidWave = 0;
+        chipDemandCount = defaultStartDemand;
     }
+
+    int getStorageChipCount() { return storageChipCount; }
+
+    int getChipDemandCount() { return chipDemandCount; }
+
+    int getCovidWave() { return covidWave; }
+
+    covidPhase getCovidPhase() { return phase; }
+
+    void setStorageChipCount(int storageCount) { storageChipCount = storageCount; }
+
+    void setChipDemandCount(int demandCount) { chipDemandCount = demandCount; }
+
+    void setCovidWave(int wave) { covidWave = wave; }
+
+    void setCovidPhase(covidPhase newPhase) { phase = newPhase; }
+
+    void incrementCovidWave() { covidWave++; }
+
+    void add2storageChipCount(int addition) { storageChipCount += addition; }
+
+    void add2chipDemandCount(int addition) { chipDemandCount += addition; }
 };
 
 #endif //IMS_DATA_H
