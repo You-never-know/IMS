@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     // create
     Data *globalData = new Data(args.getBaseDemand(), args.getCovidWave(), args.getCovidPhase());
     (new CovidProgress(globalData))->Activate();
-    (new Demand(globalData, args.getDemandIncrease()))->Activate(Exponential(14));
+    (new GenerateDemand(globalData, args.getDemandIncrease()))->Activate(Exponential(14));
     // Run the simulation
     Run();
 

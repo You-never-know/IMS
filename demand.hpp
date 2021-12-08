@@ -9,12 +9,12 @@
 #include "data.hpp"
 #include <iostream>
 
-class Demand : public Event {
+class GenerateDemand : public Event {
 private:
     int currentDemand;
     Data *globalData;
 public:
-    Demand(Data *data, int startDemand) {
+    GenerateDemand(Data *data, int startDemand) {
         currentDemand = startDemand;
         globalData = data;
     };
@@ -32,7 +32,7 @@ public:
         }
         // add current Demand to the global Demand
         globalData->add2chipDemandCount(currentDemand);
-        Activate(Time + Exponential(14))
+        Activate(Time + Exponential(14));
     };
 };
 
