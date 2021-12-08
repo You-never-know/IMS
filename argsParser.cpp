@@ -65,7 +65,7 @@ bool ArgsParser::isNumber(const std::string str) {
 
 ArgsParser::ArgsParser(int argc, char **argv) {
     int c;
-    char *arg_long{};
+
 
     /* Process arguments */
     static struct option _long_options[] = {
@@ -84,7 +84,6 @@ ArgsParser::ArgsParser(int argc, char **argv) {
         switch (c) {
 
             case 0: {
-                arg_long = optarg;
                 break;
             }
             case 't': {
