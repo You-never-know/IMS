@@ -13,6 +13,7 @@ HEADERS = \
 	demand.hpp \
 	supply.hpp \
 	argsParser.hpp \
+	production.hpp \
 	covidProgress.hpp
 
 .PHONY: all clean
