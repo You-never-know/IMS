@@ -4,7 +4,7 @@
 
 #include "simlib.h"
 #include "covidProgress.hpp"
-#include "demand.hpp"
+#include "generateDemand.hpp"
 #include "data.hpp"
 #include "argsParser.hpp"
 #include "production.hpp"
