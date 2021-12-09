@@ -10,6 +10,7 @@
 #include "production.hpp"
 #include "demandProcessing.hpp"
 #include "statistics.hpp"
+#include <iostream>
 
 #define START_TIME 0
 
@@ -22,7 +23,7 @@ int main(int argc, char **argv) {
     Statistics simulationStatistic = Statistics();
     double endTime = (args.getDaysCount() > 10) ? args.getDaysCount() : 1095;
     Init(START_TIME, endTime);
-    // create
+    // Create processes and events
     Data *globalData = new Data(args.getBaseDemand(), args.getCovidWave(), args.getCovidPhase(), &simulationStatistic);
     (new CovidProgress(globalData))->Activate();
     (new GenerateDemand(globalData, args.getDemandIncrease()))->Activate(Exponential(14));
@@ -30,7 +31,7 @@ int main(int argc, char **argv) {
     (new DemandProcessing(globalData, &simulationStatistic))->Activate();
     // Run the simulation
     Run();
-
+    std::cout << Time << std::endl;
     delete (globalData);
     return 0;
 }
