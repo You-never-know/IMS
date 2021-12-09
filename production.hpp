@@ -8,14 +8,15 @@
 #include "simlib.h"
 #include "data.hpp"
 
-class Production: public Process{
+class Production : public Process {
     Data *_globalData;
-    int _productionCapacity{};
+    long _productionCapacity{};
 
 public:
-    Production(Data *globalData, int productionCapacity):_globalData(globalData),_productionCapacity(productionCapacity) {};
+    Production(Data *globalData, long productionCapacity) : _globalData(globalData),
+                                                            _productionCapacity(productionCapacity) {};
 
-    void Behavior(){
+    void Behavior() {
         (new Production(_globalData, _productionCapacity))->Activate(Exponential(84));
         Wait(Exponential(42)); /* testing */
         _globalData->add2storageChipCount(_productionCapacity);

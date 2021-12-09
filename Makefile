@@ -10,11 +10,14 @@ OBJS = \
 
 BUILD = $(OBJS) $(APP)
 HEADERS = \
-	demand.hpp \
-	supply.hpp \
+	generateDemand.hpp \
 	argsParser.hpp \
 	production.hpp \
-	covidProgress.hpp
+	covidProgress.hpp \
+	covidPhase.hpp \
+	data.hpp \
+	demandProcessing.hpp \
+	statistics.hpp
 
 .PHONY: all clean
 all: $(APP)

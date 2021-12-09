@@ -9,19 +9,24 @@
 #include "data.hpp"
 #include <iostream>
 
+/**
+ * @brief  Class for generating demand according to the covid phase and wave
+ */
 class GenerateDemand : public Event {
 private:
-    int currentDemand;
+    long currentDemand;
     Data *globalData;
+    long defaultStartDemand = 8'653'000'000; // demand / 14 days ( calculated as average monthly car sales * average car chip count / 2)
 public:
-    GenerateDemand(Data *data, int startDemand) {
-        currentDemand = startDemand;
+    GenerateDemand(Data *data, long startDemand) {
+        currentDemand = (startDemand > 0) ? startDemand : defaultStartDemand;
         globalData = data;
     };
 
     void Behavior() {
         // change the monthly demand according to the covid phase and covid wave
         // maybe make even the demand Exponential ?
+        int wave = globalData->getCovidWave();
         if (globalData->getCovidPhase() == covidPhase::CovidFree) {
 
         } else if (globalData->getCovidPhase() == covidPhase::CovidStart) {
