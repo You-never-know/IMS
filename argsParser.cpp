@@ -87,8 +87,8 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 't': {
-                if (!isNumber(std::string(optarg))) {
-                    std::cerr << "Invalid days-count argument - must be a number!" << std::endl;
+                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 150){
+                    std::cerr << "Invalid days-count argument - must be a number greater than 150!" << std::endl;
                     exit(1);
                 }
                 _daysCount = std::stod(std::string(optarg));
@@ -114,24 +114,24 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 'd': {
-                if (!isNumber(std::string(optarg))) {
-                    std::cerr << "Invalid base-demand argument - must be a number!" << std::endl;
+                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1){
+                    std::cerr << "Invalid base-demand argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }
                 _baseDemand = std::stoul(std::string(optarg));
                 break;
             }
             case 'i': {
-                if (!isNumber(std::string(optarg))) {
-                    std::cerr << "Invalid demand-increase argument - must be a number!" << std::endl;
+                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1) {
+                    std::cerr << "Invalid demand-increase argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }
                 _demandIncrease = std::stoul(std::string(optarg));
                 break;
             }
             case 'c': {
-                if (!isNumber(std::string(optarg))) {
-                    std::cerr << "Invalid production-capacity argument - must be a number!" << std::endl;
+                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1) {
+                    std::cerr << "Invalid production-capacity argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }
                 _productionCapacity = std::stoul(std::string(optarg));

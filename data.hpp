@@ -24,8 +24,8 @@ private:
 public:
     Data(int startDemand, int startWave, covidPhase startPhase, Statistics *stat) : storageChipCount{0} {
         phase = startPhase;
-        covidWave = (startWave >= 0) ? startWave : 0;
-        chipDemandCount = (startDemand > 0) ? startDemand : defaultStartDemand;
+        covidWave = startWave;
+        chipDemandCount = startDemand;
         stats = stat;
     }
 

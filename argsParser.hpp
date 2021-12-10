@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "covidPhase.hpp"
+#include "simlib.h"
 
 /**
  * @brief  Class for parsing program arguments
@@ -32,12 +33,12 @@ public:
     bool isNumber(std::string str);
 
 private:
-    double _daysCount{};
-    int _covidWave{};
-    covidPhase _covidPhase{};
-    unsigned long _baseDemand{};
-    unsigned long _demandIncrease{};
-    unsigned long _productionCapacity{};
+    double _daysCount{1095};
+    int _covidWave{0};
+    covidPhase _covidPhase{covidPhase::CovidFree};
+    unsigned long _baseDemand{static_cast<unsigned long>(Normal(2'500'000'000, 1'000'000))};
+    unsigned long _demandIncrease{7'815'612'903}; // demand / 14 days ( calculated as average monthly car sales * average car chip count / 31 * 14)
+    unsigned long _productionCapacity{31'482'739'726};
 };
 
 std::ostream &operator<<(std::ostream &os, const ArgsParser &ap);
