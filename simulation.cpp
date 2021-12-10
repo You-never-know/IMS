@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
     std::cout << args << std::endl;
     Statistics simulationStatistic = Statistics();
     double endTime = (args.getDaysCount() > 10) ? args.getDaysCount() : 1095;
-
+    
     // Run the simulation x times
-    for (unsigned i = 0; i < 1000; i++) {
+    for (unsigned i = 0; i < 100000; i++) {
         // Init the simulation with start and end time
         Init(START_TIME, endTime);
         // Create processes and events

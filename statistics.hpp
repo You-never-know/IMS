@@ -12,7 +12,6 @@ class Statistics {
     // What do we want to know ?
     // ? Demand in queue in time
     // ? current demand in time (could be interesting)
-    // ? covid wave reached
     // ??
 private:
     Stat endTime;
