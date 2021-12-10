@@ -23,16 +23,6 @@ public:
     };
 
     void Behavior() {
-        // change the monthly demand according to the covid phase and covid wave
-        int wave = globalData->getCovidWave();
-        if (globalData->getCovidPhase() == covidPhase::CovidFree) {
-
-        } else if (globalData->getCovidPhase() == covidPhase::CovidStart) {
-
-        } else if (globalData->getCovidPhase() == covidPhase::CovidPeak) {
-
-        } else {
-        }
         // add current Demand to the global Demand
         globalData->add2chipDemandCount(currentDemand);
         Activate(Time + Exponential(14));
