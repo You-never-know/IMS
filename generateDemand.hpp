@@ -16,10 +16,9 @@ class GenerateDemand : public Event {
 private:
     long currentDemand;
     Data *globalData;
-    long defaultStartDemand = 7'815'612'903; // demand / 14 days ( calculated as average monthly car sales * average car chip count / 31 * 14)
 public:
     GenerateDemand(Data *data, long startDemand) {
-        currentDemand = (startDemand > 0) ? startDemand : defaultStartDemand;
+        currentDemand = startDemand;
         globalData = data;
     };
 

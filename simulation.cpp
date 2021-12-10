@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     ArgsParser args = ArgsParser(argc, argv);
     std::cout << args << std::endl;
     Statistics simulationStatistic = Statistics();
-    double endTime = (args.getDaysCount() > 10) ? args.getDaysCount() : 1095;
+    double endTime = args.getDaysCount();
 
     // Run the simulation x times
     for (unsigned i = 0; i < 1000; i++) {
