@@ -9,15 +9,12 @@
 #include <iostream>
 
 class Statistics {
-    // What do we want to know ?
-    // ? Demand in queue in time
-    // ? current demand in time (could be interesting)
-    // ??
 private:
     Stat endTime;
     Stat endChipStorageCount;
     Stat endChipDemand;
     unsigned int unfinishedCount;
+    Stat sellCount;
 public:
     Statistics() : unfinishedCount{0} {
         endTime.Clear();
