@@ -5,6 +5,7 @@
 #ifndef IMS_DATA_H
 #define IMS_DATA_H
 
+#include <cmath>
 #include "covidPhase.hpp"
 #include "simlib.h"
 #include "statistics.hpp"
@@ -16,19 +17,27 @@ class Data {
 private:
     unsigned long storageChipCount;
     unsigned long chipDemandCount;
+    unsigned long currentDemandIncrease;
     int covidWave;
     covidPhase phase;
+    unsigned long sellCount;
 
 public:
-    Data(int startDemand, int startWave, covidPhase startPhase) : storageChipCount{0} {
+    Data(unsigned long startDemand, unsigned long startDemandIncrease, int startWave, covidPhase startPhase)
+            : storageChipCount{0}, sellCount{0} {
         phase = startPhase;
         covidWave = startWave;
         chipDemandCount = startDemand;
+        currentDemandIncrease = startDemandIncrease;
     }
 
     unsigned long getStorageChipCount() { return storageChipCount; }
 
     unsigned long getChipDemandCount() { return chipDemandCount; }
+
+    unsigned long getSellCount() { return sellCount; }
+
+    unsigned long getCurrentDemandIncrease() { return currentDemandIncrease; }
 
     int getCovidWave() { return covidWave; }
 
@@ -42,7 +51,22 @@ public:
 
     void setCovidPhase(covidPhase newPhase) { phase = newPhase; }
 
-    void incrementCovidWave() { covidWave++; }
+    /**
+     * @brief change the Current Demand Increase by the given percentage
+     * @param percentage by which to increase/decrease
+     */
+    void changeCurrentDemandIncreaseByPercent(double percentage) {
+        //std::cout << " Before: " << currentDemandIncrease << std::endl;
+        double newPercent = 100.0 + percentage;
+        long double newDemand = static_cast<long double>(currentDemandIncrease) / 100.0 * newPercent;
+        currentDemandIncrease = static_cast<unsigned long>(newDemand);
+        //std::cout << "After: " << currentDemandIncrease << " Percentage: " << newPercent << std::endl;
+
+    }
+
+    void incrementCovidWave() {
+        covidWave++;
+    }
 
     void add2storageChipCount(unsigned long addition) { storageChipCount += addition; }
 
@@ -56,8 +80,10 @@ public:
     unsigned long sellChips(unsigned long demand) {
         if (storageChipCount >= demand) {
             storageChipCount -= demand;
+            sellCount += demand;
             return 0;
         } else {
+            sellCount += storageChipCount;
             storageChipCount = 0;
             return demand - storageChipCount;
         }

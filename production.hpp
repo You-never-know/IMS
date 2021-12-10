@@ -14,9 +14,9 @@ class Production : public Process {
 
 public:
     Production(Data *globalData, unsigned long productionCapacity) : _globalData(globalData),
-                                                            _productionCapacity(productionCapacity) {};
+                                                                     _productionCapacity(productionCapacity) {};
 
-    void Behavior() {
+    void Behavior() final {
         (new Production(_globalData, _productionCapacity))->Activate(Time + Exponential(84));
         Wait(Exponential(42)); /* testing */
         _globalData->add2storageChipCount(_productionCapacity);

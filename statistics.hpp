@@ -15,11 +15,14 @@ private:
     Stat endChipDemand;
     unsigned int unfinishedCount;
     Stat sellCount;
+    Stat demand;
 public:
     Statistics() : unfinishedCount{0} {
         endTime.Clear();
         endChipDemand.Clear();
         endChipStorageCount.Clear();
+        sellCount.Clear();
+        demand.Clear();
     }
 
     void addEndTime(double time) {
@@ -31,21 +34,33 @@ public:
     }
 
     void addEndChipStorageCount(unsigned long count) {
-        endChipStorageCount(count);
+        endChipStorageCount(static_cast<double>(count));
     }
 
     void addEndChipDemand(unsigned long count) {
-        endChipDemand(count);
+        endChipDemand(static_cast<double>(count));
+    }
+
+    void addDemand(unsigned long count) {
+        demand(static_cast<double>(count));
+    }
+
+    void addSellCount(unsigned long count) {
+        sellCount(static_cast<double>(count));
     }
 
     void printStatistics(double days) {
         std::cout << "Day when the production reached the demand" << std::endl;
         endTime.Output();
+        std::cout << "Average demand" << std::endl;
+        demand.Output();
         std::cout << "Chip count at the storage at the final day" << std::endl;
+        endChipStorageCount.Output();
+        std::cout << "Chip sold" << std::endl;
         endChipStorageCount.Output();
 
         if (unfinishedCount > 0) {
-            std::cout << "Simulation did not finish in " << days << " days " << unfinishedCount << " /1000 times."
+            std::cout << "Simulation did not finish in " << days << " days " << unfinishedCount << " /100 000 times."
                       << std::endl;
             std::cout << "End demand:" << std::endl;
             endChipDemand.Output();

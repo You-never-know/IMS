@@ -14,17 +14,15 @@
  */
 class GenerateDemand : public Event {
 private:
-    long currentDemand;
     Data *globalData;
 public:
-    GenerateDemand(Data *data, long startDemand) {
-        currentDemand = startDemand;
+    explicit GenerateDemand(Data *data) {
         globalData = data;
     };
 
-    void Behavior() {
+    void Behavior() final {
         // add current Demand to the global Demand
-        globalData->add2chipDemandCount(currentDemand);
+        globalData->add2chipDemandCount(globalData->getCurrentDemandIncrease());
         Activate(Time + Exponential(14));
     };
 };

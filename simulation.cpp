@@ -22,14 +22,14 @@ int main(int argc, char **argv) {
     double endTime = args.getDaysCount();
 
     // Run the simulation x times
-    for (unsigned i = 0; i < 100000; i++) {
+    for (unsigned i = 0; i < 100; i++) {
         // Init the simulation with start and end time
         Init(START_TIME, endTime);
         // Create processes and events
-        Data *globalData = new Data(args.getBaseDemand(), args.getCovidWave(), args.getCovidPhase(),
-                                    &simulationStatistic);
+        Data *globalData = new Data(args.getBaseDemand(), args.getDemandIncrease(), args.getCovidWave(),
+                                    args.getCovidPhase());
         (new CovidProgress(globalData))->Activate();
-        (new GenerateDemand(globalData, args.getDemandIncrease()))->Activate(Exponential(14));
+        (new GenerateDemand(globalData))->Activate(Exponential(14));
         (new Production(globalData, args.getProductionCapacity()))->Activate(Exponential(84));
         (new DemandProcessing(globalData, &simulationStatistic))->Activate();
         // Run the simulation
@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
                 simulationStatistic.addUnfinishedSimulation();
                 simulationStatistic.addEndChipDemand(globalData->getChipDemandCount());
             }
+            simulationStatistic.addSellCount(globalData->getSellCount());
         }
         delete (globalData);
     }

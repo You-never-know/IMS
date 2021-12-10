@@ -24,7 +24,8 @@ public:
 
     void Behavior() final {
         processDemand();
-        Activate(Time + 30); // activate every month
+        stats->addDemand(globalData->getCurrentDemandIncrease());
+        Activate(Time + Exponential(14)); // activate every 14 days
     }
 
     void processDemand() {
@@ -32,6 +33,7 @@ public:
         if (globalData->getChipDemandCount() == 0) {
             stats->addEndTime(Time);
             stats->addEndChipStorageCount(globalData->getStorageChipCount());
+            stats->addSellCount(globalData->getSellCount());
             Stop();
         }
     }
