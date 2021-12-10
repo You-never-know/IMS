@@ -18,22 +18,12 @@ private:
     unsigned long chipDemandCount;
     int covidWave;
     covidPhase phase;
-    int defaultStartDemand = 200;
-    Statistics *stats;
 
 public:
-    Data(int startDemand, int startWave, covidPhase startPhase, Statistics *stat) : storageChipCount{0} {
+    Data(int startDemand, int startWave, covidPhase startPhase) : storageChipCount{0} {
         phase = startPhase;
         covidWave = startWave;
         chipDemandCount = startDemand;
-        stats = stat;
-    }
-
-    explicit Data(Statistics *stat) : storageChipCount{0} {
-        phase = covidPhase::CovidFree;
-        covidWave = 0;
-        chipDemandCount = defaultStartDemand;
-        stats = stat;
     }
 
     unsigned long getStorageChipCount() { return storageChipCount; }
