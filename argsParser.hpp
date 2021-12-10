@@ -21,11 +21,11 @@ public:
 
     covidPhase getCovidPhase() const { return _covidPhase; }
 
-    int getBaseDemand() const { return _baseDemand; }
+    unsigned long getBaseDemand() const { return _baseDemand; }
 
-    int getDemandIncrease() const { return _demandIncrease; }
+    unsigned long getDemandIncrease() const { return _demandIncrease; }
 
-    int getProductionCapacity() const { return _productionCapacity; }
+    unsigned long getProductionCapacity() const { return _productionCapacity; }
 
     void printHelp();
 
@@ -35,9 +35,9 @@ private:
     double _daysCount{};
     int _covidWave{};
     covidPhase _covidPhase{};
-    int _baseDemand{};
-    int _demandIncrease{};
-    int _productionCapacity{};
+    unsigned long _baseDemand{};
+    unsigned long _demandIncrease{};
+    unsigned long _productionCapacity{};
 };
 
 std::ostream &operator<<(std::ostream &os, const ArgsParser &ap);

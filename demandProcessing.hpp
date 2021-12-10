@@ -10,7 +10,7 @@
 #include "statistics.hpp"
 
 /**
- * @brief  Class for processing orders and taking statistics
+ * @brief  Class for processing orders
  */
 class DemandProcessing : public Event {
 private:
@@ -22,9 +22,18 @@ public:
         stats = stat;
     }
 
-    void Behavior() {
+    void Behavior() final {
+        processDemand();
+        Activate(Time + 30); // activate every month
+    }
 
-        Activate(Time + 1);
+    void processDemand() {
+        globalData->setChipDemandCount(globalData->sellChips(globalData->getChipDemandCount()));
+        if (globalData->getChipDemandCount() == 0) {
+            stats->addEndTime(Time);
+            stats->addEndChipStorageCount(globalData->getStorageChipCount());
+            Stop();
+        }
     }
 };
 

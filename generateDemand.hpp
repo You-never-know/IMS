@@ -16,7 +16,7 @@ class GenerateDemand : public Event {
 private:
     long currentDemand;
     Data *globalData;
-    long defaultStartDemand = 8'653'000'000; // demand / 14 days ( calculated as average monthly car sales * average car chip count / 2)
+    long defaultStartDemand = 7'815'612'903; // demand / 14 days ( calculated as average monthly car sales * average car chip count / 31 * 14)
 public:
     GenerateDemand(Data *data, long startDemand) {
         currentDemand = (startDemand > 0) ? startDemand : defaultStartDemand;
@@ -25,7 +25,6 @@ public:
 
     void Behavior() {
         // change the monthly demand according to the covid phase and covid wave
-        // maybe make even the demand Exponential ?
         int wave = globalData->getCovidWave();
         if (globalData->getCovidPhase() == covidPhase::CovidFree) {
 

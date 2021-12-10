@@ -76,7 +76,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
             {"demand-increase",     required_argument, 0, 'i'},
             {"production-capacity", required_argument, 0, 'c'},
             {"help",                no_argument,       0, 'h'},
-            {0,                     0,                 0, 0}};
+            {0, 0,                                     0, 0}};
 
     int option_index;
     while ((c = getopt_long(argc, argv, "t:w:f:d:i:c:h", _long_options, &option_index)) !=
@@ -118,7 +118,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                     std::cerr << "Invalid base-demand argument - must be a number!" << std::endl;
                     exit(1);
                 }
-                _baseDemand = std::stoi(std::string(optarg));
+                _baseDemand = std::stoul(std::string(optarg));
                 break;
             }
             case 'i': {
@@ -126,7 +126,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                     std::cerr << "Invalid demand-increase argument - must be a number!" << std::endl;
                     exit(1);
                 }
-                _demandIncrease = std::stoi(std::string(optarg));
+                _demandIncrease = std::stoul(std::string(optarg));
                 break;
             }
             case 'c': {
@@ -134,7 +134,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                     std::cerr << "Invalid production-capacity argument - must be a number!" << std::endl;
                     exit(1);
                 }
-                _productionCapacity = std::stoi(std::string(optarg));
+                _productionCapacity = std::stoul(std::string(optarg));
                 break;
             }
             case 'h': {

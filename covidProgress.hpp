@@ -17,7 +17,7 @@ private:
     Data *globalData;
 
 public:
-    CovidProgress(Data *data) {
+    explicit CovidProgress(Data *data) {
         globalData = data;
         if (globalData->getCovidPhase() == covidPhase::CovidFree) {
             globalData->setCovidPhase(covidPhase::CovidEnd);
@@ -30,7 +30,7 @@ public:
         }
     }
 
-    void Behavior() {
+    void Behavior() final {
         if (globalData->getCovidPhase() == covidPhase::CovidFree) {
             globalData->setCovidPhase(covidPhase::CovidStart);
             globalData->incrementCovidWave();

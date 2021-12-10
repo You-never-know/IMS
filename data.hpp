@@ -14,8 +14,8 @@
  */
 class Data {
 private:
-    long storageChipCount;
-    long chipDemandCount;
+    unsigned long storageChipCount;
+    unsigned long chipDemandCount;
     int covidWave;
     covidPhase phase;
     int defaultStartDemand = 200;
@@ -29,23 +29,24 @@ public:
         stats = stat;
     }
 
-    Data() : storageChipCount{0} {
+    explicit Data(Statistics *stat) : storageChipCount{0} {
         phase = covidPhase::CovidFree;
         covidWave = 0;
         chipDemandCount = defaultStartDemand;
+        stats = stat;
     }
 
-    long getStorageChipCount() { return storageChipCount; }
+    unsigned long getStorageChipCount() { return storageChipCount; }
 
-    long getChipDemandCount() { return chipDemandCount; }
+    unsigned long getChipDemandCount() { return chipDemandCount; }
 
     int getCovidWave() { return covidWave; }
 
     covidPhase getCovidPhase() { return phase; }
 
-    void setStorageChipCount(int storageCount) { storageChipCount = storageCount; }
+    void setStorageChipCount(unsigned long storageCount) { storageChipCount = storageCount; }
 
-    void setChipDemandCount(int demandCount) { chipDemandCount = demandCount; }
+    void setChipDemandCount(unsigned long demandCount) { chipDemandCount = demandCount; }
 
     void setCovidWave(int wave) { covidWave = wave; }
 
@@ -53,9 +54,25 @@ public:
 
     void incrementCovidWave() { covidWave++; }
 
-    void add2storageChipCount(long addition) { storageChipCount += addition; }
+    void add2storageChipCount(unsigned long addition) { storageChipCount += addition; }
 
-    void add2chipDemandCount(long addition) { chipDemandCount += addition; }
+    void add2chipDemandCount(unsigned long addition) { chipDemandCount += addition; }
+
+    /**
+     * @brief process demand with chips in stock
+     * @param demand
+     * @return demand after processing
+     */
+    unsigned long sellChips(unsigned long demand) {
+        if (storageChipCount >= demand) {
+            storageChipCount -= demand;
+            return 0;
+        } else {
+            storageChipCount = 0;
+            return demand - storageChipCount;
+        }
+    }
 };
+
 
 #endif //IMS_DATA_H

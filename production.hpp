@@ -10,13 +10,15 @@
 
 class Production : public Process {
     Data *_globalData;
-    long _productionCapacity{};
+    unsigned long _productionCapacity{};
+    unsigned long _defaultProductionCapacity = 31'482'739'726; // number of chips made in 84 days
 
 public:
-    Production(Data *globalData, long productionCapacity) : _globalData(globalData),
-                                                            _productionCapacity(productionCapacity) {};
+    Production(Data *globalData, unsigned long productionCapacity) : _globalData(globalData) {
+        _productionCapacity = (productionCapacity > 0) ? productionCapacity : _defaultProductionCapacity;
+    };
 
-    void Behavior() {
+    void Behavior() final {
         (new Production(_globalData, _productionCapacity))->Activate(Time + Exponential(84));
         Wait(Exponential(42)); /* testing */
         _globalData->add2storageChipCount(_productionCapacity);
