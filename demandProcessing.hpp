@@ -16,10 +16,12 @@ class DemandProcessing : public Event {
 private:
     Data *globalData;
     Statistics *stats;
+    int test;
 public:
     DemandProcessing(Data *data, Statistics *stat) {
         globalData = data;
         stats = stat;
+        test = 0;
     }
 
     void Behavior() final {

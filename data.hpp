@@ -18,6 +18,7 @@ private:
     unsigned long storageChipCount;
     unsigned long chipDemandCount;
     unsigned long currentDemandIncrease;
+    unsigned long currentDemandFinalState;
     int covidWave;
     covidPhase phase;
     unsigned long sellCount;
@@ -29,6 +30,7 @@ public:
         covidWave = startWave;
         chipDemandCount = startDemand;
         currentDemandIncrease = startDemandIncrease;
+        currentDemandFinalState = startDemandIncrease;
     }
 
     unsigned long getStorageChipCount() { return storageChipCount; }
@@ -56,12 +58,11 @@ public:
      * @param percentage by which to increase/decrease
      */
     void changeCurrentDemandIncreaseByPercent(double percentage) {
-        //std::cout << " Before: " << currentDemandIncrease << std::endl;
+        unsigned long previousDemandFinalState = currentDemandFinalState;
         double newPercent = 100.0 + percentage;
-        long double newDemand = static_cast<long double>(currentDemandIncrease) / 100.0 * newPercent;
-        currentDemandIncrease = static_cast<unsigned long>(newDemand);
-        //std::cout << "After: " << currentDemandIncrease << " Percentage: " << newPercent << std::endl;
-
+        long double newDemand = (static_cast<long double>(currentDemandFinalState) / 100.0) * newPercent;
+        currentDemandFinalState = static_cast<unsigned long>(newDemand);
+        currentDemandIncrease = (previousDemandFinalState + currentDemandFinalState) / 2;
     }
 
     void incrementCovidWave() {

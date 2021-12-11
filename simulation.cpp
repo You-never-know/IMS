@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
         (new CovidProgress(globalData))->Activate();
         (new GenerateDemand(globalData))->Activate(Exponential(14));
         (new Production(globalData, args.getProductionCapacity()))->Activate(Exponential(84));
-        (new DemandProcessing(globalData, &simulationStatistic))->Activate();
+        (new DemandProcessing(globalData, &simulationStatistic))->Activate(Exponential(14));
         // Run the simulation
         Run();
         // Process the demand to make the final state
