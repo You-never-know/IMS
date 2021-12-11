@@ -27,7 +27,7 @@ public:
     void Behavior() final {
         processDemand();
         stats->addDemand(globalData->getCurrentDemandIncrease());
-        Activate(Time + Exponential(14)); // activate every 14 days
+        Activate(Time + Normal(14, 2)); // activate every 14 days
     }
 
     void processDemand() {

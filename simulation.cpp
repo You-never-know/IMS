@@ -29,9 +29,9 @@ int main(int argc, char **argv) {
         Data *globalData = new Data(args.getBaseDemand(), args.getDemandIncrease(), args.getCovidWave(),
                                     args.getCovidPhase());
         (new CovidProgress(globalData))->Activate();
-        (new GenerateDemand(globalData))->Activate(Exponential(14));
-        (new Production(globalData, args.getProductionCapacity()))->Activate(Exponential(84));
-        (new DemandProcessing(globalData, &simulationStatistic))->Activate(Exponential(14));
+        (new GenerateDemand(globalData))->Activate(Normal(14, 2));
+        (new Production(globalData, args.getProductionCapacity()))->Activate(Normal(84, 8));
+        (new DemandProcessing(globalData, &simulationStatistic))->Activate(Normal(14, 2));
         // Run the simulation
         Run();
         // Process the demand to make the final state

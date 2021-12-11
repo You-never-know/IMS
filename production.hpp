@@ -17,8 +17,8 @@ public:
                                                                      _productionCapacity(productionCapacity) {};
 
     void Behavior() final {
-        (new Production(_globalData, _productionCapacity))->Activate(Time + Exponential(84));
-        Wait(Exponential(42)); /* testing */
+        (new Production(_globalData, _productionCapacity))->Activate(Time + Normal(84, 8));
+        Wait(Normal(42, 8)); /* testing */
         _globalData->add2storageChipCount(_productionCapacity);
     }
 

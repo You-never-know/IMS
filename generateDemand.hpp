@@ -23,7 +23,7 @@ public:
     void Behavior() final {
         // add current Demand to the global Demand
         globalData->add2chipDemandCount(globalData->getCurrentDemandIncrease());
-        Activate(Time + Exponential(14));
+        Activate(Time + Normal(14, 2));
     };
 };
 
