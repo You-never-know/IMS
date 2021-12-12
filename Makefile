@@ -31,5 +31,8 @@ simulation.o: simulation.cpp $(HEADERS)
 argsParser.o: argsParser.cpp argsParser.hpp
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
+run:
+	./simulation
+
 clean:
 	rm -f $(BUILD)

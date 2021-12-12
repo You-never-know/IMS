@@ -13,9 +13,10 @@ std::ostream &operator<<(std::ostream &os, const ArgsParser &ap) {
     os << "Days count: " << ap.getDaysCount() << std::endl
        << "Covid wave: " << ap.getCovidWave() << std::endl
        << "Covid phase: " << getValueKey(ap.getCovidPhase()) << std::endl
-       << "Initial chip demand: " << ap.getBaseDemand() << std::endl
-       << "Regular increase in chip demand: " << ap.getDemandIncrease() << std::endl
-       << "Chip production capacity: " << ap.getProductionCapacity() << std::endl;
+       << "Initial chip demand: " << ap.getBaseDemand() << " units" << std::endl
+       << "Regular increase in chip demand: " << ap.getDemandIncrease() << " per 14 days" << std::endl
+       << "Chip production capacity: " << ap.getProductionCapacity() << " per one production cycle (~84 days)"
+       << std::endl;
     return os;
 }
 
@@ -87,7 +88,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 't': {
-                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 150){
+                if ((!isNumber(std::string(optarg))) || std::stoul(std::string(optarg)) < 150) {
                     std::cerr << "Invalid days-count argument - must be a number greater than 150!" << std::endl;
                     exit(1);
                 }
@@ -114,7 +115,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 'd': {
-                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1){
+                if ((!isNumber(std::string(optarg))) || std::stoul(std::string(optarg)) < 1) {
                     std::cerr << "Invalid base-demand argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }
@@ -122,7 +123,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 'i': {
-                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1) {
+                if ((!isNumber(std::string(optarg))) || std::stoul(std::string(optarg)) < 1) {
                     std::cerr << "Invalid demand-increase argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }
@@ -130,7 +131,7 @@ ArgsParser::ArgsParser(int argc, char **argv) {
                 break;
             }
             case 'c': {
-                if ((!isNumber(std::string(optarg))) ||  std::stoul(std::string(optarg)) < 1) {
+                if ((!isNumber(std::string(optarg))) || std::stoul(std::string(optarg)) < 1) {
                     std::cerr << "Invalid production-capacity argument - must be a number greater than 0!" << std::endl;
                     exit(1);
                 }

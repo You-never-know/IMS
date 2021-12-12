@@ -52,17 +52,17 @@ public:
     void printStatistics(double days) {
         std::cout << "Day when the production reached the demand" << std::endl;
         endTime.Output();
+        std::cout << "Chip count at the storage at the final day in successful runs" << std::endl;
+        endChipStorageCount.Output();
         std::cout << "Average demand" << std::endl;
         demand.Output();
-        std::cout << "Chip count at the storage at the final day" << std::endl;
-        endChipStorageCount.Output();
         std::cout << "Chip sold" << std::endl;
         endChipStorageCount.Output();
 
         if (unfinishedCount > 0) {
-            std::cout << "Simulation did not finish in " << days << " days " << unfinishedCount << " /100 000 times."
+            std::cout << "Simulation did not finish " << unfinishedCount << " of 100 000 times in " << days << " days."
                       << std::endl;
-            std::cout << "End demand:" << std::endl;
+            std::cout << "End demand in simulations that did not finish:" << std::endl;
             endChipDemand.Output();
         }
     }
