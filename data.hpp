@@ -69,7 +69,9 @@ public:
         covidWave++;
     }
 
-    void add2storageChipCount(unsigned long addition) { storageChipCount += addition; }
+    void add2storageChipCount(unsigned long addition) {
+        storageChipCount += addition;
+    }
 
     void add2chipDemandCount(unsigned long addition) { chipDemandCount += addition; }
 
@@ -85,8 +87,9 @@ public:
             return 0;
         } else {
             sellCount += storageChipCount;
+            unsigned long subtract = storageChipCount;
             storageChipCount = 0;
-            return demand - storageChipCount;
+            return demand - subtract;
         }
     }
 };

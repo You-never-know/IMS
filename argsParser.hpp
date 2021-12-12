@@ -37,7 +37,7 @@ private:
     int _covidWave{0};
     covidPhase _covidPhase{covidPhase::CovidFree};
     unsigned long _baseDemand{static_cast<unsigned long>(Normal(2'500'000'000, 1'000'000))};
-    unsigned long _demandIncrease{3'577'777'780}; // demand / 14 days
+    unsigned long _demandIncrease{7'933'333'333}; // demand / 14 days
     unsigned long _productionCapacity{31'482'739'726}; // production / 84 days (production takes ~84 days)
 };
 
