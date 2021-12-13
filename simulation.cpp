@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
             if (globalData->getChipDemandCount() == 0) {
                 simulationStatistic.addEndTime(Time);
                 simulationStatistic.addEndChipStorageCount(globalData->getStorageChipCount());
+                simulationStatistic.addSellCount(globalData->getSellCount());
             } else {
                 simulationStatistic.addUnfinishedSimulation();
                 simulationStatistic.addEndChipDemand(globalData->getChipDemandCount());
