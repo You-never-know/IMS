@@ -1,0 +1,30 @@
+Hlavná otazka: ??? 
+
+Treba zistiť:
+1. Covid - štatistika 
+2. poptávka (maybe konstantná) - štatistika  
+
+Premenné/ vstupné parametry: 
+1, (zaočkovanosť, propably not)
+2. (počet tovární, propably not)
+3. priemerná výrobná kapacita, 
+4. v/po ktorej vlne sa nachádzame
+5. v akej fáze covid začíname (peak / ústup / ...)
+
+(zaočkovanosť - koefocient, zvyšovanie -> čím vyšší, nižší pokles výroby -> meaning)
+
+Procesy: 
+1. výroba čipov
+2. priebeh covid (+ zaočkovanosť)
+3. poptávka
+
+Sledujeme:
+1. počet várek ve sklade
+2. poptávka
+3. predané várky / čipy  
+...
+
+Info:
+1. počet čipov vo várke ovplivnuje výrobná kapacita (zadaná) 
+
+
